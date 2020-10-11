@@ -37,7 +37,7 @@ exports.put = async function(req, res, next) {
         let users = await User.find(req.query, req.fields).exec()
         await Promise.all(users.map(user => {
             for (field in req.body) {
-                user[field] = req.body[field]
+                user[field] = req.body[field] || undefined
             }
             return user.save()
         }))
